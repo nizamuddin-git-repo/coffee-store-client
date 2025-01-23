@@ -5,6 +5,10 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AddCoffee from './compnents/AddCoffee.jsx';
 import UpdateCoffee from './compnents/UpdateCoffee.jsx';
+import SignUp from './compnents/SignUp.jsx';
+import SignIn from './compnents/SignIn.jsx';
+import AuthProvider from './compnents/provider/AuthProvider.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -21,12 +25,22 @@ const router = createBrowserRouter([
     element: <UpdateCoffee></UpdateCoffee>,
     loader: ({params})=> fetch(`http://localhost:5000/coffee/${params.id}`)
   },
+  {
+    path: '/signup',
+    element: <SignUp></SignUp>
+  },
+  {
+    path: '/signin',
+    element: <SignIn></SignIn>
+  },
 ])
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* <App /> */}
+    <AuthProvider>
     <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
   </StrictMode>,
 )
